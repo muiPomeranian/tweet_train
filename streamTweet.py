@@ -11,7 +11,7 @@
 # then json file format...
 
 # Calling the callback
-# once tweepy decodes the tweet data, we will pass the data to a preregistered callback function def _data.
+# once tweepy decodes the tweet_train data, we will pass the data to a preregistered callback function def _data.
 #   self.listener will check whether data is good to go or not. If data is not good or does not match with the criteria, it wil shut down the connection.
 
 import tweepy
@@ -67,7 +67,7 @@ class StreamListener(tweepy.StreamListener):
 
         try:
             # db에 쌓는거 대신에,
-            # self.temp_arr.append(each tweet object)
+            # self.temp_arr.append(each tweet_train object)
             # self.len_temp_arr += 1
             tweet_dict = dict(
                 user_description=description,
@@ -103,49 +103,10 @@ class StreamListener(tweepy.StreamListener):
         return False to disconnects the stream if our connections reaches to the limit
         Rate limiting and other concerns
         tweepy handles the rate limits, prohibition on the # of connection attempts from same authorization keys
-        Attention: If we take too long to process tweets, they will start to get queued, and twitter may disconnect our CONNECTION. -> We need to process each tweet extremly fast.
+        Attention: If we take too long to process tweets, they will start to get queued, and twitter may disconnect our CONNECTION. -> We need to process each tweet_train extremly fast.
 
         :param self:
         :param status_code:
         :return:
         '''
         if status_code == 420: return False
-
-
-
-#
-# def filter_tweet(tweet):
-#     '''
-#     remove any tweets that do not match the criteria
-#     This is CALLBACK with streamer which gets the tweet in real-time
-#     This will be called every time as receiving the new tweet
-#     Then process_tweet or store_tweet will be called
-#     :param tweet:
-#     :return:
-#     '''
-#
-#     if not tweet_mateches_critera(tweet):
-#         return
-#
-#
-# # process the remaining tweet)
-# process_tweet(tweet)
-#
-# def process_tweet(tweet):
-#     '''
-#     update the tweet dictionary with any other information we need
-#     :param tweet:
-#     :return:
-#     '''
-#
-#     tweet['sentiment'] = get_sentiment(tweet)
-#
-# # Store the tweet
-# store_tweet(tweet)
-#
-# def store_tweet(tweet):
-#     '''
-#     save a tweet for later processing
-#     :param tweet:
-#     :return:
-#     '''
